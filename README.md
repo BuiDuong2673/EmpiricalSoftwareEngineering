@@ -4,6 +4,8 @@ Experimental Program for a Conference Paper Practicing Knowledge Learned in the 
 ## Description
 
 ## Result
+
+### Accuracy experiment (RQ1)
 The LLM-based evaluator showed comparable performance to human evaluators. Here are the results:
 
 ```cmd
@@ -14,3 +16,12 @@ Accuracy of LLM: 112 / 116 = 0.9655
 
 The accuracy of the LLM is 96.55%, which is high. It only produced two more incorrect cases compared to the humans.
 
+We calculated the inter-rater consistency using Cohen’s Kappa metrics. Here are the results:
+
+```cmd
+Human vs Human inter-rater consistency - Cohen Kappa: 0.7327
+Human 1 vs LLM inter-rater consistency - Cohen Kappa: 0.5991
+Human 2 vs LLM inter-rater consistency - Cohen Kappa: 0.6485
+```
+
+This result shows that human evaluators were not always give correct evaluation. In this case, there are 4 cases that the evalutors give different assessments. In 2 of these cases, after discussion, it turns out that evaluator 1 is right. In 2 other cases, it turns out that evaluator 2 is correct.

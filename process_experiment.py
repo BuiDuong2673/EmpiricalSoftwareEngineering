@@ -1,5 +1,6 @@
 """Contain every functions needed to process the data in the experiment."""
 import json
+from sklearn.metrics import cohen_kappa_score
 
 
 class HumanExperiment:
@@ -348,7 +349,58 @@ class HumanExperiment:
         # Store the wrong cases in a file
         with open("llm_wrong_assessment.json", "w", encoding="utf-8") as file:
             json.dump(wrong_assessment_dict, file, ensure_ascii=False, indent=4)
-        print("Saved LLM wrong assessment to file: llm_wrong_assessment.json")            
+        print("Saved LLM wrong assessment to file: llm_wrong_assessment.json")
+
+    def measure_cohen_kappa(self, human_path_1: str, human_path_2: str) -> None:
+        """Calculate the inter-rater accuracy between human vs human, human vs llm.
+        
+        Args:
+            human_path_1 (str): path to human evaluator 1 assessment file.
+            human_path_2 (str): path to human evaluator 2 assessment file.
+        """          
+        # Read human evaluators assessments
+        with open(human_path_1, "r", encoding="utf-8") as file_1:
+            human_assessment_1 = json.load(file_1)
+        with open(human_path_2, "r", encoding="utf-8") as file_2:
+            human_assessment_2 = json.load(file_2)
+        # Read LLM evaluator assessment
+        try:
+            with open(self.full_accuracy_report_path, 'r', encoding='utf-8') as file:
+                llm_report = [json.loads(line) for line in file]
+        except FileNotFoundError:
+            print(f"File not found: {self.full_accuracy_report_path}")
+            return
+        # Collect list of human assessment
+        human_assessment_list_1 = []
+        human_assessment_list_2 = []
+        for hi_1, _ in human_assessment_1.items():
+            human_assessment_list_1.append(human_assessment_1[hi_1].get("assessment"))
+            human_assessment_list_2.append(human_assessment_2[hi_1].get("assessment"))
+        print(f"len(human_assessment_list_1) = {len(human_assessment_list_1)}")
+        print(f"len(human_assessment_list_2) = {len(human_assessment_list_2)}")
+        
+        # Collect list of LLM assessment
+        llm_assessment_list = []
+        for index, human_report in human_assessment_1.items():
+            question = human_report.get("question")
+            for l_report in llm_report:
+                if l_report.get("question") == question:
+                    llm_assessment_list.append(str(l_report.get("assessment")).lower())
+                    break
+        print(f"len(llm_assessment_list) = {len(llm_assessment_list)}")
+
+        # Calculate human vs human inter-rater
+        human_human_kappa = cohen_kappa_score(human_assessment_list_1, human_assessment_list_2)
+        print(f"Human vs Human inter-rater consistency - Cohen Kappa: {human_human_kappa:.4f}")
+
+        # Calculate human 1 vs llm inter-rater
+        human_llm_kappa_1 = cohen_kappa_score(human_assessment_list_1, llm_assessment_list)
+        print(f"Human 1 vs LLM inter-rater consistency - Cohen Kappa: {human_llm_kappa_1:.4f}")
+
+        # Calculate human 2 vs llm inter-rater
+        human_llm_kappa_2 = cohen_kappa_score(human_assessment_list_2, llm_assessment_list)
+        print(f"Human 2 vs LLM inter-rater consistency - Cohen Kappa: {human_llm_kappa_2:.4f}")
+
 
     
 if __name__ == "__main__":
@@ -366,12 +418,17 @@ if __name__ == "__main__":
     #     "filled_form/human_experiment_second_round_2.json"
     # )
 
-    human_experiment.create_accurate_assessment(
-        "filled_form/human_experiment_second_round_1.json",
-        "filled_form/human_experiment_second_round_2.json",
-        "filled_form/second_round_discrepancies.json"
-    )
+    # human_experiment.create_accurate_assessment(
+    #     "filled_form/human_experiment_second_round_1.json",
+    #     "filled_form/human_experiment_second_round_2.json",
+    #     "filled_form/second_round_discrepancies.json"
+    # )
 
     # human_experiment.calculate_llm_accuracy(
     #     "filled_form/correct_assessment.json"
     # )
+
+    human_experiment.measure_cohen_kappa(
+        "filled_form/human_experiment_second_round_1.json",
+        "filled_form/human_experiment_second_round_2.json",       
+    )
