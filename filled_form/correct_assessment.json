@@ -1,0 +1,466 @@
+{
+    "0": {
+        "question": "What is the application deadline for the winter semester for the program Aerospace - Bachelor of Science (B.Sc.)?",
+        "correct assessment": "true"
+    },
+    "1": {
+        "question": "What is the standard duration of studies for the program Chemical Engineering - Bachelor of Science (B.Sc.)?",
+        "correct assessment": "true"
+    },
+    "2": {
+        "question": "What is the application period for the winter semester for the program Biomedical Neuroscience - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "3": {
+        "question": "What is the standard duration of studies for the program Engineering Science - Bachelor of Science (B.Sc.)?",
+        "correct assessment": "true"
+    },
+    "4": {
+        "question": "What is the required language proficiency for the program Medical Life Science and Technology (PhD-Program) - Doctorate Program?",
+        "correct assessment": "true"
+    },
+    "5": {
+        "question": "What is the application period for the winter semester for the program Pharmaceutical Bioprocess Engineering - Bachelor of Science (B.Sc.)?",
+        "correct assessment": "true"
+    },
+    "6": {
+        "question": "What is the application period for the summer semester for the program Electrical Engineering and Information Technology - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "7": {
+        "question": "What is the required language proficiency for the program Molecular Biotechnology - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "8": {
+        "question": "What is the standard duration of studies for the program Technology of Biogenic Resources - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "9": {
+        "question": "What is the application period for the winter semester for the program Finance and Information Management (FIM) - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "10": {
+        "question": "What is the cost of the EMBA Tuition Fees for the program Executive MBA in Business & IT - Master of Business Administration (MBA)?",
+        "correct assessment": "true"
+    },
+    "11": {
+        "question": "For the program Vocational Education and Innovation - Master of Science (M.Sc.), what is the standard duration of studies expressed in number of semesters?",
+        "correct assessment": "true"
+    },
+    "12": {
+        "question": "What is the application period for the winter semester for the Data & Society - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "13": {
+        "question": "For the Chemical Engineering - Master of Science (M.Sc.) program, what is the required language proficiency?",
+        "correct assessment": "true"
+    },
+    "14": {
+        "question": "What is the minimum score required in TOEFL (Internet-Based Test) for the Integrated Circuit Design - Master of Science (M.Sc.) program?",
+        "correct assessment": "false"
+    },
+    "15": {
+        "question": "At which TUM campus does the Sustainable Energy and Processes - Master of Science (M.Sc.) program take place?",
+        "correct assessment": "true"
+    },
+    "16": {
+        "question": "What are the three areas of specialization offered in the Geodesy and Geoinformation - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "17": {
+        "question": "What is the required language proficiency for admission to the Medical Engineering - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "18": {
+        "question": "What is the standard duration of studies for the Geophysics - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "19": {
+        "question": "What is the application period for the Political Science - Bachelor of Science (B.Sc.) program for the winter semester?",
+        "correct assessment": "true"
+    },
+    "20": {
+        "question": "What is the required language proficiency for the Geodesy and Geoinformation - Bachelor of Science (B.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "21": {
+        "question": null,
+        "correct assessment": null
+    },
+    "22": {
+        "question": "What is the standard duration of studies for the Lehramt an Realschulen – Unterrichtsfach Sport - State Exam Program?",
+        "correct assessment": "true"
+    },
+    "23": {
+        "question": "What are the application periods for the Sustainable Management and Technology - Master of Science (M.Sc.) program for the winter and summer semesters?",
+        "correct assessment": "true"
+    },
+    "24": {
+        "question": "What is the application period for the Politics & Technology - Master of Science (M.Sc.) program for the winter semester?",
+        "correct assessment": "false"
+    },
+    "25": {
+        "question": "What is the application period for the Biology - Master of Science (M.Sc.) program for the winter semester?",
+        "correct assessment": "true"
+    },
+    "26": {
+        "question": "What is the standard duration of studies for the Data Engineering and Analytics - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "27": {
+        "question": "What is the required language proficiency for the Business Education I - Master of Science (M.Sc.) program?",
+        "correct assessment": "false"
+    },
+    "28": {
+        "question": "What is the standard duration of studies for the program Vocational Education Agriculture (Teaching at Vocational Schools) - Master of Education (M.Ed.)?",
+        "correct assessment": "true"
+    },
+    "29": {
+        "question": "What is the application period for the winter semester for the program Information Systems - Bachelor of Science (B.Sc.)?",
+        "correct assessment": "true"
+    },
+    "30": {
+        "question": "What is the standard duration of studies for the program Chemistry - Bachelor of Science (B.Sc.)?",
+        "correct assessment": "true"
+    },
+    "31": {
+        "question": "What is the required language proficiency for the program Green Electronics - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "32": {
+        "question": "What is the application period for the winter semester for the program Computational Science and Engineering (CSE) - Master of Science (M.Sc.)?",
+        "correct assessment": "false"
+    },
+    "33": {
+        "question": "What is the standard duration of studies for the program Biochemistry - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "34": {
+        "question": "What is the application period for the winter semester for the program Agrosystem Sciences - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "35": {
+        "question": "What is the required language proficiency for the program Chemical Biotechnology - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "36": {
+        "question": "What is the application period for the summer semester for the program studium MINT (Certificate) - Certificate?",
+        "correct assessment": "true"
+    },
+    "37": {
+        "question": "What is the required language proficiency for the program Industrial Biotechnology - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "38": {
+        "question": "What is the standard duration of studies for the program Teaching at Academic Secondary Schools – Scientific Education - Master of Education (M.Ed.)?",
+        "correct assessment": "true"
+    },
+    "39": {
+        "question": "What is the required language proficiency for the program Physics (Nuclear, Particle and Astrophysics) - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "40": {
+        "question": "What is the standard duration of studies for the program Biomass Technology - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "41": {
+        "question": "What is the application period for the winter semester for the program Risk and Safety - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "42": {
+        "question": "What is the standard duration of studies for the program Engineering and Materials Science - Bachelor of Science (B.Sc.)?",
+        "correct assessment": "false"
+    },
+    "43": {
+        "question": "What is the required language proficiency for the program Vocational Education Health and Health Care Science (Teaching at Vocational Schools) - Bachelor of Education (B.Ed.)?",
+        "correct assessment": "true"
+    },
+    "44": {
+        "question": "What is the required language proficiency for the program Neuroengineering - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "45": {
+        "question": "What is the standard duration of studies for the program Geomaterials and Geochemistry - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "46": {
+        "question": "What is the application period for the winter semester for the program Forest and Wood Science - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "47": {
+        "question": "What is the required language proficiency for the program Food Chemistry - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "48": {
+        "question": "What is the standard duration of studies for the program Vocational Education Electrical Engineering and Information Technology (Teaching at Vocational Schools) - Bachelor of Education (B.Ed.)?",
+        "correct assessment": "true"
+    },
+    "49": {
+        "question": "What is the standard duration of studies for the program Lehramt an Mittelschulen – Didaktikfach Sport - State Exam Program?",
+        "correct assessment": "true"
+    },
+    "50": {
+        "question": "What is the required language proficiency for the program Automotive Engineering - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "51": {
+        "question": "What is the required language proficiency for the program Mathematics - Bachelor of Science (B.Sc.)?",
+        "correct assessment": "true"
+    },
+    "52": {
+        "question": "What is the required language proficiency for the program Urbanism – Urban and Landscape Studies and Design - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "53": {
+        "question": "What is the standard duration of studies for the program Food Technology - Bachelor of Science (B.Sc.)?",
+        "correct assessment": "true"
+    },
+    "54": {
+        "question": "What is the required language proficiency for the program Management and Data Science - Bachelor of Science (B.Sc.)?",
+        "correct assessment": "true"
+    },
+    "55": {
+        "question": "What is the standard duration of studies for the program ESPACE – Earth Oriented Space Science and Technology - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "56": {
+        "question": "What is the required language proficiency for the program Bioinformatics - Master of Science (M.Sc.)?",
+        "correct assessment": "false"
+    },
+    "57": {
+        "question": "What is the standard duration of studies for the program Environmental Engineering - Bachelor of Science (B.Sc.)?",
+        "correct assessment": "true"
+    },
+    "58": {
+        "question": "What is the standard duration of studies for the Agricultural and Horticultural Sciences - Bachelor of Science (B.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "59": {
+        "question": "What is the application period for the Management (am Campus Heilbronn) - Master of Science (M.Sc.) program for the winter semester?",
+        "correct assessment": "true"
+    },
+    "60": {
+        "question": "What is the English language proficiency requirement for the Executive MBA in Innovation and Business Creation - Master of Business Administration (MBA) program?",
+        "correct assessment": "true"
+    },
+    "61": {
+        "question": "What is the standard duration of studies for the Mechatronics, Robotics and Biomechanical Engineering - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "62": {
+        "question": "What is the required language proficiency for the Vocational Education Agriculture (Teaching at Vocational Schools) - Bachelor of Education (B.Ed.) program?",
+        "correct assessment": "true"
+    },
+    "63": {
+        "question": "What is the application period for the Responsibility in Science, Engineering and Technology (RESET) - Master of Arts (M.A.) program for the winter semester?",
+        "correct assessment": "true"
+    },
+    "64": {
+        "question": "What is the application period for the Informatics - Master of Science (M.Sc.) program for the summer semester?",
+        "correct assessment": "false"
+    },
+    "65": {
+        "question": null,
+        "correct assessment": null
+    },
+    "66": {
+        "question": "What is the required language proficiency for the program AgriFood Economics, Policy and Regulation - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "67": {
+        "question": "What is the standard duration of studies for the program Vocational Education Nutrition and Home Economics (Teaching at Vocational Schools) - Master of Education (M.Ed.)?",
+        "correct assessment": "true"
+    },
+    "68": {
+        "question": "What are the required language proficiencies for the program Robotics, Cognition, Intelligence - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "69": {
+        "question": "What is the standard duration of studies for the program Electronics and Data Engineering - Bachelor of Engineering (B.Eng.)?",
+        "correct assessment": "true"
+    },
+    "70": {
+        "question": "What is the required language proficiency for the program Biogenic Materials - Bachelor of Science (B.Sc.)?",
+        "correct assessment": "true"
+    },
+    "71": {
+        "question": "What is the standard duration of studies for the program Radiation Biology - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "72": {
+        "question": "What is the required language proficiency for the program Brewing and Beverage Technology - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "73": {
+        "question": "What is the required language proficiency for the program Lehramt an Grundschulen und Mittelschulen – Unterrichtsfach Sport - State Exam Program?",
+        "correct assessment": "true"
+    },
+    "74": {
+        "question": "What is the standard duration of studies for the program Life Sciences Biology - Bachelor of Science (B.Sc.)?",
+        "correct assessment": "true"
+    },
+    "75": {
+        "question": "What is the required language proficiency for the program Technology of Biogenic Resources - Bachelor of Science (B.Sc.)?",
+        "correct assessment": "true"
+    },
+    "76": {
+        "question": "What is the standard duration of studies for the program Development, Production and Management in Mechanical Engineering - Master of Science (M.Sc.)?",
+        "correct assessment": "true"
+    },
+    "77": {
+        "question": "What are the application periods for the Management and Technology - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "78": {
+        "question": "How many ECTS credits do students obtain per semester in the Cartography - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "79": {
+        "question": "What is the required language proficiency for the program Teaching at Academic Secondary Schools – Scientific Education - Bachelor of Education (B.Ed.)?",
+        "correct assessment": "true"
+    },
+    "80": {
+        "question": "What is the standard duration of studies for the Mechanical Engineering - Bachelor of Science (B.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "81": {
+        "question": "In the Management and Technology (am Campus Heilbronn) - Bachelor of Science (B.Sc.) program, what percentage of the courses are management courses?",
+        "correct assessment": "true"
+    },
+    "82": {
+        "question": "How many ECTS credits are required for the Architecture - Bachelor of Arts (B.A.) program?",
+        "correct assessment": "true"
+    },
+    "83": {
+        "question": "In which city is the Aerospace Engineering - Master of Science (M.Sc.) program conducted?",
+        "correct assessment": "true"
+    },
+    "84": {
+        "question": "What is the duration of the Master's thesis in the Food Technology - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "85": {
+        "question": "What is the application period for the Vocational Education Nutrition and Home Economics (Teaching at Vocational Schools) - Bachelor of Education (B.Ed.) program?",
+        "correct assessment": "true"
+    },
+    "86": {
+        "question": "What is the total credit points (ECTS) for the Management and Technology - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "87": {
+        "question": "What is the standard duration of studies for Lehramt an Mittelschulen – Didaktikfach Sport - State Exam Program?",
+        "correct assessment": "true"
+    },
+    "88": {
+        "question": "What is the required language proficiency for the program Lehramt an beruflichen Schulen – Masterstudiengang Berufliche Bildung Integriert - Master of Education (M.Ed.)?",
+        "correct assessment": "true"
+    },
+    "89": {
+        "question": "Is the Logistics Engineering and Management - Master of Science (M.Sc.) program taught in English?",
+        "correct assessment": "true"
+    },
+    "90": {
+        "question": "What is the standard duration of studies for the Mechanical Engineering - Bachelor of Science (B.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "91": {
+        "question": "What is the required language proficiency for the Information Systems - Bachelor of Science (B.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "92": {
+        "question": "What is the language of instruction for the Microelectronics and Chip Design - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "93": {
+        "question": "What is the standard duration of studies for the Geosciences - Bachelor of Science (B.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "94": {
+        "question": "What is the standard duration of studies for the Information Engineering (at TUM Campus Heilbronn) - Bachelor of Science (B.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "95": {
+        "question": "What is the required language proficiency for the Responsibility in Science, Engineering and Technology (RESET) - Master of Arts (M.A.) program?",
+        "correct assessment": "true"
+    },
+    "96": {
+        "question": "What is the standard duration of studies for the Brewing and Beverage Technology - Bachelor of Science (B.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "97": {
+        "question": "What are the application periods for the Sustainable Management and Technology - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "98": {
+        "question": "What is the application period for the Sustainable Resource Management - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "99": {
+        "question": "What is the standard duration of studies for the Computational Mechanics - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "100": {
+        "question": "What is the required language proficiency for the Forest and Wood Science - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "101": {
+        "question": "What is the application period for the Microelectronics and Chip Design - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "102": {
+        "question": "What is the tuition fees for the Executive MBA in Innovation and Business Creation - Master of Business Administration (MBA) program?",
+        "correct assessment": "true"
+    },
+    "103": {
+        "question": "Where is the Industrial Chemistry - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "104": {
+        "question": "What is the standard duration of studies for the Technology of Biogenic Resources - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "105": {
+        "question": "What is the application period for the Pharmaceutical Bioprocess Engineering - Bachelor of Science (B.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "106": {
+        "question": "What is the standard duration of studies for the Medicine (Clinical Work) - State Exam Program?",
+        "correct assessment": "true"
+    },
+    "107": {
+        "question": "What is the standard duration of studies for the Integrated Circuit Design - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "108": {
+        "question": "What is the application period for the Environmental Engineering - Bachelor of Science (B.Sc.) program for the winter semester?",
+        "correct assessment": "true"
+    },
+    "109": {
+        "question": "What is the standard duration of studies for the Bioinformatics - Bachelor of Science (B.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "110": {
+        "question": "What is the application period for the Politics & Technology - Master of Science (M.Sc.) program for the winter semester?",
+        "correct assessment": "false"
+    },
+    "111": {
+        "question": "What is the application period for the Physics (Applied and Engineering Physics) - Master of Science (M.Sc.) program for the summer semester?",
+        "correct assessment": "true"
+    },
+    "112": {
+        "question": "What is the application period for the Civil Engineering - Bachelor of Science (B.Sc.) program for the winter semester?",
+        "correct assessment": "true"
+    },
+    "113": {
+        "question": "What is the standard duration of studies for the Vocational Education and Innovation - Master of Science (M.Sc.) program?",
+        "correct assessment": "true"
+    },
+    "114": {
+        "question": "What is the standard duration of studies for the Teaching at Academic Secondary Schools – Scientific Education - Bachelor of Education (B.Ed.) program?",
+        "correct assessment": "true"
+    },
+    "115": {
+        "question": "What is the application period for the Psychology with Specialization in School Psychology for Teacher Certification at Vocational Schools (bachelor's supplementary degree program component) - Other program for the winter semester?",
+        "correct assessment": "true"
+    }
+}

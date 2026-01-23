@@ -1,0 +1,22 @@
+{
+    "0": {
+        "question": "What is the application deadline for the winter semester for the program Aerospace - Bachelor of Science (B.Sc.)?",
+        "llm assessment": false,
+        "correct assessment": "true"
+    },
+    "14": {
+        "question": "What is the minimum score required in TOEFL (Internet-Based Test) for the Integrated Circuit Design - Master of Science (M.Sc.) program?",
+        "llm assessment": true,
+        "correct assessment": "false"
+    },
+    "32": {
+        "question": "What is the application period for the winter semester for the program Computational Science and Engineering (CSE) - Master of Science (M.Sc.)?",
+        "llm assessment": true,
+        "correct assessment": "false"
+    },
+    "64": {
+        "question": "What is the application period for the Informatics - Master of Science (M.Sc.) program for the summer semester?",
+        "llm assessment": true,
+        "correct assessment": "false"
+    }
+}

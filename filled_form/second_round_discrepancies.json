@@ -1,0 +1,30 @@
+{
+    "0": {
+        "question": "What is the minimum score required in TOEFL (Internet-Based Test) for the Integrated Circuit Design - Master of Science (M.Sc.) program?",
+        "chatbot answer": "The minimum required score for TOEFL (Internet-Based Test) is 88 points.",
+        "evaluator 1 assessment": "false",
+        "evaluator 2 assessment": "true",
+        "which correct": "1"
+    },
+    "1": {
+        "question": "Is proof of English language proficiency required for the Information Engineering (at TUM Campus Heilbronn) - Bachelor of Science (B.Sc.) program?",
+        "chatbot answer": "LLM chatbot response: - **Answer**: No, proof of English language proficiency is not required for the Information Engineering (at TUM Campus Heilbronn) - Bachelor of Science (B.Sc.) program.\n- **Explanation**: Although proof of English proficiency is not required, you still need sufficient English language skills, which will be checked during the application process.\n- **Program URLs**: [1]\n",
+        "evaluator 1 assessment": "false",
+        "evaluator 2 assessment": "true",
+        "which correct": "2"
+    },
+    "2": {
+        "question": "What is the standard duration of studies for the Mechanical Engineering - Master of Science (M.Sc.) program?",
+        "chatbot answer": "LLM chatbot response: - **Answer**: The standard duration of studies for the Mechanical Engineering - Master of Science (M.Sc.) program is 4 semesters (fulltime).\n- **Explanation**: This information is directly stated in the provided context.\n- **Program URLs**: [2]\n",
+        "evaluator 1 assessment": "false",
+        "evaluator 2 assessment": "true",
+        "which correct": "2"
+    },
+    "3": {
+        "question": "What is the application period for the Politics & Technology - Master of Science (M.Sc.) program for the winter semester?",
+        "chatbot answer": "LLM chatbot response: - **Answer:** The application period for the Politics & Technology - Master of Science (M.Sc.) program for the winter semester is from January 1st to May 31st.\n- **Explanation:** This information is explicitly stated in the provided context.\n- **Program URLs:** None available in the context.\n",
+        "evaluator 1 assessment": "false",
+        "evaluator 2 assessment": "true",
+        "which correct": "1"
+    }
+}
