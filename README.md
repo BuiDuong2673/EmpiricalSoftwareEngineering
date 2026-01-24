@@ -45,3 +45,11 @@ Interquartile range: 0.1000
 Mean: 0.9016
 Median: 0.9048
 ```
+
+Inter-rater consistency using Cohen's Kappa metrics between human evaluators and between human evaluators and LLM are:
+
+```cmd
+Human vs Human inter-rater consistency - Cohen Kappa: 0.8955
+Human 1 vs LLM inter-rater consistency - Cohen Kappa: 0.7816
+Human 2 vs LLM inter-rater consistency - Cohen Kappa: 0.7910
+```

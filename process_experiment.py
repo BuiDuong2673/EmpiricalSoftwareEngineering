@@ -649,6 +649,57 @@ class AttackExperiment:
         print(f"Interquartile range: {iqr:.4f}")
         print(f"Mean: {mean:.4f}")
         print(f"Median: {median:.4f}")
+    
+    def measure_cohen_kappa(self, human_path_1: str, human_path_2: str) -> None:
+        """Calculate the inter-rater accuracy between human vs human, human vs llm.
+        
+        Args:
+            human_path_1 (str): path to human evaluator 1 assessment file.
+            human_path_2 (str): path to human evaluator 2 assessment file.
+        """          
+        # Read human evaluators assessments
+        with open(human_path_1, "r", encoding="utf-8") as file_1:
+            human_assessment_1 = json.load(file_1)
+        with open(human_path_2, "r", encoding="utf-8") as file_2:
+            human_assessment_2 = json.load(file_2)
+        # Read LLM evaluator assessment
+        try:
+            with open(self.llm_attack_report_path, 'r', encoding='utf-8') as file:
+                llm_report = [json.loads(line) for line in file]
+        except FileNotFoundError:
+            print(f"File not found: {self.llm_attack_report_path}")
+            return
+        # Collect list of human assessment
+        human_assessment_list_1 = []
+        human_assessment_list_2 = []
+        for hi_1, _ in human_assessment_1.items():
+            human_assessment_list_1.append(human_assessment_1[hi_1].get("is success"))
+            human_assessment_list_2.append(human_assessment_2[hi_1].get("is success"))
+        print(f"len(human_assessment_list_1) = {len(human_assessment_list_1)}")
+        print(f"len(human_assessment_list_2) = {len(human_assessment_list_2)}")
+        
+        # Collect list of LLM assessment
+        llm_assessment_list = []
+        for index, human_report in human_assessment_1.items():
+            attack_prompt = human_report.get("attack prompt")
+            for l_report in llm_report:
+                if l_report.get("attack prompt") == attack_prompt:
+                    llm_assessment_list.append(str(l_report.get("is success")).lower())
+                    break
+        print(f"len(llm_assessment_list) = {len(llm_assessment_list)}")
+
+        # Calculate human vs human inter-rater
+        human_human_kappa = cohen_kappa_score(human_assessment_list_1, human_assessment_list_2)
+        print(f"Human vs Human inter-rater consistency - Cohen Kappa: {human_human_kappa:.4f}")
+
+        # Calculate human 1 vs llm inter-rater
+        human_llm_kappa_1 = cohen_kappa_score(human_assessment_list_1, llm_assessment_list)
+        print(f"Human 1 vs LLM inter-rater consistency - Cohen Kappa: {human_llm_kappa_1:.4f}")
+
+        # Calculate human 2 vs llm inter-rater
+        human_llm_kappa_2 = cohen_kappa_score(human_assessment_list_2, llm_assessment_list)
+        print(f"Human 2 vs LLM inter-rater consistency - Cohen Kappa: {human_llm_kappa_2:.4f}")
+
 
 
 if __name__ == "__main__":
@@ -705,3 +756,8 @@ if __name__ == "__main__":
     )
 
     attack_experiment.calculate_llm_per_class_variance(class_accuracies)
+
+    attack_experiment.measure_cohen_kappa(
+        "filled_form/human_experiment_attack_1.json",
+        "filled_form/human_experiment_attack_2.json"
+    )
