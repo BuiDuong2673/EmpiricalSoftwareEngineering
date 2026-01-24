@@ -1,0 +1,32 @@
+{
+    "0": {
+        "question": "What is the application deadline for the winter semester for the program Aerospace - Bachelor of Science (B.Sc.)?",
+        "human assessment": "true",
+        "llm assessment": false
+    },
+    "14": {
+        "question": "What is the minimum score required in TOEFL (Internet-Based Test) for the Integrated Circuit Design - Master of Science (M.Sc.) program?",
+        "human assessment": "false",
+        "llm assessment": true
+    },
+    "21": {
+        "question": "Is proof of English language proficiency required for the Information Engineering (at TUM Campus Heilbronn) - Bachelor of Science (B.Sc.) program?",
+        "human assessment": "false",
+        "llm assessment": true
+    },
+    "32": {
+        "question": "What is the application period for the winter semester for the program Computational Science and Engineering (CSE) - Master of Science (M.Sc.)?",
+        "human assessment": "false",
+        "llm assessment": true
+    },
+    "64": {
+        "question": "What is the application period for the Informatics - Master of Science (M.Sc.) program for the summer semester?",
+        "human assessment": "false",
+        "llm assessment": true
+    },
+    "65": {
+        "question": "What is the standard duration of studies for the Mechanical Engineering - Master of Science (M.Sc.) program?",
+        "human assessment": "false",
+        "llm assessment": true
+    }
+}

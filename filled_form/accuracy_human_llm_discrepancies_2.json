@@ -1,0 +1,22 @@
+{
+    "0": {
+        "question": "What is the application deadline for the winter semester for the program Aerospace - Bachelor of Science (B.Sc.)?",
+        "human assessment": "true",
+        "llm assessment": false
+    },
+    "32": {
+        "question": "What is the application period for the winter semester for the program Computational Science and Engineering (CSE) - Master of Science (M.Sc.)?",
+        "human assessment": "false",
+        "llm assessment": true
+    },
+    "64": {
+        "question": "What is the application period for the Informatics - Master of Science (M.Sc.) program for the summer semester?",
+        "human assessment": "false",
+        "llm assessment": true
+    },
+    "110": {
+        "question": "What is the application period for the Politics & Technology - Master of Science (M.Sc.) program for the winter semester?",
+        "human assessment": "true",
+        "llm assessment": false
+    }
+}

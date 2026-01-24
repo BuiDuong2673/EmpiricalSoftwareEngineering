@@ -380,6 +380,85 @@ class AccuracyExperiment:
         human_llm_kappa_2 = cohen_kappa_score(human_assessment_list_2, llm_assessment_list)
         print(f"Human 2 vs LLM inter-rater consistency - Cohen Kappa: {human_llm_kappa_2:.4f}")
 
+    def compare_human_llm_assessment(self, human_path_1: str, human_path_2: str) -> None:
+        """Compare the assessments made by LLM with the assessments made by human evaluators.
+        
+        Args:
+            human_path_1 (str): path to human evaluator 1 assessment.
+            human_path_2 (str): path to human evaluator 2 assessment.
+        """
+        # Read human evaluators assessments
+        with open(human_path_1, "r", encoding="utf-8") as file_1:
+            human_assessment_1 = json.load(file_1)
+        with open(human_path_2, "r", encoding="utf-8") as file_2:
+            human_assessment_2 = json.load(file_2)
+        # Read LLM evaluator assessment
+        try:
+            with open(self.full_accuracy_report_path, 'r', encoding='utf-8') as file:
+                llm_report = [json.loads(line) for line in file]
+        except FileNotFoundError:
+            print(f"File not found: {self.full_accuracy_report_path}")
+            return
+        
+        # Variables to count the number of time they have the same and different assessment
+        same_1 = 0
+        different_1= 0
+        same_2 = 0
+        different_2= 0
+
+        # Variable to store the discrepancies cases
+        discrepancy_1 = {}
+        discrepancy_2 = {}
+
+        # Compare human evaluator 1 assessment with LLM
+        for idx, assess_1 in human_assessment_1.items():
+            question = assess_1.get("question")
+            # Compare if same index have same question
+            if question == llm_report[int(idx)].get("question"):
+                # Check if they have the same assessment
+                if assess_1.get("assessment") == str(llm_report[int(idx)].get("assessment")).lower():
+                    same_1 += 1
+                else:
+                    different_1 += 1
+                    discrepancy_1[idx] = {
+                        "question": question,
+                        "human assessment": assess_1.get("assessment"),
+                        "llm assessment": llm_report[int(idx)].get("assessment")
+                    }
+            else:
+                print(f"WARNING: there is something wrong with the order. Questions in {idx} are different.")
+        
+        # Compare human evaluator 2 assessment with LLM
+        for idx, assess_2 in human_assessment_2.items():
+            question = assess_2.get("question")
+            # Compare if same index have same question
+            if question == llm_report[int(idx)].get("question"):
+                # Check if they have the same assessment
+                if assess_2.get("assessment") == str(llm_report[int(idx)].get("assessment")).lower():
+                    same_2 += 1
+                else:
+                    different_2 += 1
+                    discrepancy_2[idx] = {
+                        "question": question,
+                        "human assessment": assess_2.get("assessment"),
+                        "llm assessment": llm_report[int(idx)].get("assessment")
+                    }
+            else:
+                print(f"WARNING: there is something wrong with the order. Questions in {idx} are different.")
+
+        # Visualize the data
+        print(f"Evaluator 1 vs LLM:\nSame: {same_1}\nDifferent: {different_1}")
+        print(f"Evaluator 2 vs LLM:\nSame: {same_2}\nDifferent: {different_2}")
+
+        # Save the discrepancies cases to a file
+        with open("accuracy_human_llm_discrepancies_1.json", "w", encoding="utf-8") as file:
+            json.dump(discrepancy_1, file, ensure_ascii=False, indent=4)
+        print("Saved discrepancies to file: accuracy_human_llm_discrepancies_1.json")
+
+        with open("accuracy_human_llm_discrepancies_2.json", "w", encoding="utf-8") as file:
+            json.dump(discrepancy_2, file, ensure_ascii=False, indent=4)
+        print("Saved discrepancies to file: accuracy_human_llm_discrepancies_2.json")
+
 
 class AttackExperiment:
     """This is the program to analyze the prompt attack experiment data."""
@@ -703,7 +782,7 @@ class AttackExperiment:
 
 
 if __name__ == "__main__":
-    # accuracy_experiment = AccuracyExperiment()
+    accuracy_experiment = AccuracyExperiment()
     # accuracy_experiment.create_experiment_form_round_1(is_accuracy=False)
 
     # accuracy_experiment.change_jsonl_to_json("old_experiment/human_vs_chatbot_comparison_1.jsonl")
@@ -732,6 +811,11 @@ if __name__ == "__main__":
     #     "filled_form/human_experiment_second_round_2.json",       
     # )
 
+    accuracy_experiment.compare_human_llm_assessment(
+        "filled_form/human_experiment_second_round_1.json",
+        "filled_form/human_experiment_second_round_2.json"
+    )
+
     attack_experiment = AttackExperiment()
 
     # attack_experiment.create_human_experiment_form()
@@ -751,13 +835,13 @@ if __name__ == "__main__":
     #     "filled_form/attack_evaluators_discrepancies.json"
     # )
 
-    class_accuracies = attack_experiment.calculate_llm_accuracy(
-        "filled_form/attack_correct_assessment.json"
-    )
+    # class_accuracies = attack_experiment.calculate_llm_accuracy(
+    #     "filled_form/attack_correct_assessment.json"
+    # )
 
-    attack_experiment.calculate_llm_per_class_variance(class_accuracies)
+    # attack_experiment.calculate_llm_per_class_variance(class_accuracies)
 
-    attack_experiment.measure_cohen_kappa(
-        "filled_form/human_experiment_attack_1.json",
-        "filled_form/human_experiment_attack_2.json"
-    )
+    # attack_experiment.measure_cohen_kappa(
+    #     "filled_form/human_experiment_attack_1.json",
+    #     "filled_form/human_experiment_attack_2.json"
+    # )

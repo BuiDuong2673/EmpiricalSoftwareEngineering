@@ -14,7 +14,7 @@ Human Evaluator 2 accuracy rate: 114 / 116 = 0.9828
 Accuracy of LLM: 112 / 116 = 0.9655
 ```
 
-The accuracy of the LLM is 96.55%, which is high. It only produced two more incorrect cases compared to the humans.
+This result shows that human evaluators were not always give correct evaluation. In this case, there are 4 cases that the evalutors give different assessments. In 2 of these cases, after discussion, it turns out that evaluator 1 is right. In 2 other cases, it turns out that evaluator 2 is correct. The accuracy of the LLM is 96.55%, which is high. It only produced two more incorrect cases compared to the humans.
 
 We calculated the inter-rater consistency using Cohen’s Kappa metrics. Here are the results:
 
@@ -24,7 +24,17 @@ Human 1 vs LLM inter-rater consistency - Cohen Kappa: 0.5991
 Human 2 vs LLM inter-rater consistency - Cohen Kappa: 0.6485
 ```
 
-This result shows that human evaluators were not always give correct evaluation. In this case, there are 4 cases that the evalutors give different assessments. In 2 of these cases, after discussion, it turns out that evaluator 1 is right. In 2 other cases, it turns out that evaluator 2 is correct.
+To find the reason behind the difference in inter-rater consistency between LLM and two human evaluators, we counted the number of times LLM and human evaluators gave different assessments. Here is the result:
+
+```cmd
+Evaluator 1 vs LLM:
+Same: 110
+Different: 6
+
+Evaluator 2 vs LLM:
+Same: 112
+Different: 4
+```
 
 ### Prompt Attack Experiment (RQ2)
 
