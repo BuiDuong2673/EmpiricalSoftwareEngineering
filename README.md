@@ -38,6 +38,13 @@ Different: 4
 
 ### Prompt Attack Experiment (RQ2)
 
+The accuracy of human evaluators assessments are:
+
+```cmd
+Evaluator 1 accuracy: 42 / 44 = 0.9545
+Evaluator 2 accuracy: 44 / 44 = 1.0000
+```
+
 The overall accuracy of LLM, and the accuracies in different classes are:
 
 ```cmd

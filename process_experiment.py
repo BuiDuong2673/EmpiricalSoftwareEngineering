@@ -829,11 +829,11 @@ if __name__ == "__main__":
     #     "filled_form/human_experiment_attack_2.json"
     # )
 
-    # attack_experiment.create_correct_assessment(
-    #     "filled_form/human_experiment_attack_1.json",
-    #     "filled_form/human_experiment_attack_2.json",
-    #     "filled_form/attack_evaluators_discrepancies.json"
-    # )
+    attack_experiment.create_correct_assessment(
+        "filled_form/human_experiment_attack_1.json",
+        "filled_form/human_experiment_attack_2.json",
+        "filled_form/attack_evaluators_discrepancies.json"
+    )
 
     # class_accuracies = attack_experiment.calculate_llm_accuracy(
     #     "filled_form/attack_correct_assessment.json"
