@@ -26,7 +26,7 @@ Human 2 vs LLM inter-rater consistency - Cohen Kappa: 0.6485
 
 This result shows that human evaluators were not always give correct evaluation. In this case, there are 4 cases that the evalutors give different assessments. In 2 of these cases, after discussion, it turns out that evaluator 1 is right. In 2 other cases, it turns out that evaluator 2 is correct.
 
-### Prompt Attack Experimen
+### Prompt Attack Experiment (RQ2)
 
 The overall accuracy of LLM, and the accuracies in different classes are:
 
