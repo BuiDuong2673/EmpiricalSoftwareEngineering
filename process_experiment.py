@@ -1,15 +1,15 @@
 """Contain every functions needed to process the data in the experiment."""
 import json
+import statistics
+import numpy as np
 from sklearn.metrics import cohen_kappa_score
 
 
-class HumanExperiment:
+class AccuracyExperiment:
     """Extract data from LLM report to support 2 experiments with human evaluators."""
-    def __init__(self, is_accuracy: bool=True) -> None:
+    def __init__(self) -> None:
         """Initialize the class."""
-        self.is_accuracy = is_accuracy
         self.full_accuracy_report_path = "llm_report/accuracy_test_reports.jsonl"
-        self.full_attack_report_path = "llm_report/attack_test_reports.jsonl"
 
     def accuracy_first_experiment(self, full_report: list[dict]) -> list[dict]:
         """Extract only the question from each json in full_report."""
@@ -25,50 +25,29 @@ class HumanExperiment:
     
     def create_experiment_form_round_1(self) -> None:
         """Retrieved informations needed and provide the blank space for evaluator to fill in for round 1."""
-        if self.is_accuracy:
-            report_path = self.full_accuracy_report_path
-            try:
-                with open(report_path, 'r', encoding='utf-8') as file:
-                    full_report = [json.loads(line) for line in file]
-            except FileNotFoundError:
-                print(f"File not found: {report_path}")
-                return
-            
-            # Extract first and second round form
-            first_round_data_list = self.accuracy_first_experiment(full_report)
-            first_round_data_dict = {}
-            for i, data_dict in enumerate(first_round_data_list):
-                first_round_data_dict[i] = data_dict
+        report_path = self.full_accuracy_report_path
+        try:
+            with open(report_path, 'r', encoding='utf-8') as file:
+                full_report = [json.loads(line) for line in file]
+        except FileNotFoundError:
+            print(f"File not found: {report_path}")
+            return
+        
+        # Extract first and second round form
+        first_round_data_list = self.accuracy_first_experiment(full_report)
+        first_round_data_dict = {}
+        for i, data_dict in enumerate(first_round_data_list):
+            first_round_data_dict[i] = data_dict
 
-            # Define the paths where these forms will be stored.
-            first_round_output_paths = []
-            for i in range(2):
-                first_round_output_paths.append(f"human_experiment_first_round_{i + 1}.json")
+        # Define the paths where these forms will be stored.
+        first_round_output_paths = []
+        for i in range(2):
+            first_round_output_paths.append(f"human_experiment_first_round_{i + 1}.json")
 
-            # Save the form into the file paths
-            for frp in first_round_output_paths:
-                with open(frp, 'w', encoding='utf-8') as file:
-                    json.dump(first_round_data_dict, file, ensure_ascii=False, indent=4)
-        else:
-            report_path = self.full_attack_report_path
-            try:
-                with open(report_path, 'r', encoding='utf-8') as file:
-                    full_report = [json.loads(line) for line in file]
-            except FileNotFoundError:
-                print(f"File not found: {report_path}")
-                return
-            attack_data_list = self.attack_experiment(full_report)
-            attack_data_dict = {}
-            for i, data_dict in enumerate(attack_data_list):
-                attack_data_dict[i] = data_dict
-
-            output_paths = []
-            for i in range(2):
-                output_paths.append(f"human_experiment_attack_{i + 1}.json")
-            
-            for op in output_paths:
-                with open(op, 'w', encoding='utf-8') as file:
-                    json.dump(attack_data_dict, file, ensure_ascii=False, indent=4)
+        # Save the form into the file paths
+        for frp in first_round_output_paths:
+            with open(frp, 'w', encoding='utf-8') as file:
+                json.dump(first_round_data_dict, file, ensure_ascii=False, indent=4)
         
     def create_experiment_form_round_2(self) -> None:
         """Create the form for round 2."""
@@ -402,33 +381,327 @@ class HumanExperiment:
         print(f"Human 2 vs LLM inter-rater consistency - Cohen Kappa: {human_llm_kappa_2:.4f}")
 
 
+class AttackExperiment:
+    """This is the program to analyze the prompt attack experiment data."""
     
+    def __init__(self) -> None:
+        self.llm_attack_report_path = "llm_report/attack_test_reports.jsonl"
+    
+    def create_human_experiment_form(self):
+        """Hide LLM assessment and ask human to assess chatbot whether it is vulnerable to prompt attacks."""
+        try:
+            with open(self.llm_attack_report_path, 'r', encoding='utf-8') as file:
+                full_report = [json.loads(line) for line in file]
+        except FileNotFoundError:
+            print(f"File not found: {self.llm_attack_report_path}")
+            return
+        
+        attack_data_dict = {}
+        for i, data_dict in enumerate(full_report):
+            attack_data_dict[i] = {
+                "type of attack": data_dict.get("type of attack"),
+                "attack prompt": data_dict.get("attack prompt"),
+                "chatbot response": data_dict.get("chatbot response"),
+                "is success": ""
+            }
+
+        output_paths = []
+        for i in range(2):
+            output_paths.append(f"human_experiment_attack_{i + 1}.json")
+        
+        for op in output_paths:
+            with open(op, 'w', encoding='utf-8') as file:
+                json.dump(attack_data_dict, file, ensure_ascii=False, indent=4)
+    
+    def find_empty_answer(self, file_path: str) -> None:
+        """Check if there are any cases that human evaluator skipped.
+        
+        Args:
+            file_path (str): path to human evaluator file.
+        """
+        with open(file_path, "r", encoding="utf-8") as file:
+            human_assessment = json.load(file)
+        
+        miss_num = 0
+        for idx, assessment in human_assessment.items():
+            if assessment.get("is success").strip() == "":
+                print(f"The Evalutor missed this case: {assessment.get("attack prompt")}")
+                miss_num += 1
+        
+        print(f"The number of assessment missed: {miss_num}")
+    
+    def compare_human_assessment(self, file_path_1: str, file_path_2: str) -> None:
+        """Compare the human evaluator assessments and write the discrepancy case into a file.
+        
+        Args:
+            file_path_1 (str): the path to evaluator 1 assessment report.
+            file_path_2 (str): the path to evaluator 2 assessment report.
+        """
+        # Read the evaluators' assessment reports
+        with open(file_path_1, "r", encoding="utf-8") as file_1:
+            human_assessment_1 = json.load(file_1)
+        with open(file_path_2, "r", encoding="utf-8") as file_2:
+            human_assessment_2 = json.load(file_2)
+        
+        # Search for the discrepancies
+        discrepancy_dict = {}
+        for idx, assess_1 in human_assessment_1.items():
+            attack_prompt = assess_1.get("attack prompt")
+            if attack_prompt == human_assessment_2[idx].get("attack prompt"):
+                # Check if the assessment is the same
+                if assess_1.get("is success").strip() != human_assessment_2[idx].get("is success").strip():
+                    discrepancy_dict[idx] = {
+                        "attack prompt": attack_prompt,
+                        "chatbot response": assess_1.get("chatbot response"),
+                        "evaluator 1 assessment": assess_1.get("is success"),
+                        "evaluator 2 assessment": human_assessment_2[idx].get("is success"),
+                        "which correct": ""
+                    }
+            else:
+                print(f"WARNING: something with the attack order. Why attack {idx} are different between evaluators?")
+        
+        # Visualize the difference
+        print(f"The number of discrepancies: {len(discrepancy_dict.values())}")
+
+        # Save the discrepancies into a file
+        if len(discrepancy_dict.values()) > 0:
+            output_path = "attack_evaluators_discrepancies.json"
+            with open(output_path, 'w', encoding='utf-8') as file:
+                json.dump(discrepancy_dict, file, ensure_ascii=False, indent=4)
+            print(f"Saved the discrepancies into: {output_path}")
+    
+    def create_correct_assessment(self, file_path_1: str, file_path_2: str, discrepancy_path: str) -> None:
+        """Create a correct assessment as the one that both human evaluators agree.
+        
+        Args:
+            file_path_1 (str): the path to human 1 assessment report.
+            file_path_2 (str): the path to human 2 assessment report.
+            discrepancy_path (str): the path to the file storing cases that 2 evaluators give different assessment.
+        """
+        # Read the evaluators' assessment reports
+        with open(file_path_1, "r", encoding="utf-8") as file_1:
+            human_assessment_1 = json.load(file_1)
+        with open(file_path_2, "r", encoding="utf-8") as file_2:
+            human_assessment_2 = json.load(file_2)
+        # Read the discrepancies report
+        with open(discrepancy_path, "r", encoding="utf-8") as file_3:
+            discrepancy_dict = json.load(file_3)
+        
+        # Track the accuracy of human evaluators
+        accuracy_1 = 0
+        accuracy_2 = 0
+
+        # Store the correct assessment for each case
+        correct_assessment_dict = {}
+        # Loop through each attack case
+        for idx, assess_1 in human_assessment_1.items():
+            correct_assessment_dict[idx] = {
+                "attack prompt": human_assessment_2[idx].get("attack prompt"),
+                "chatbot response": human_assessment_2[idx].get("chatbot response"),
+            }
+            if assess_1.get("attack prompt") == human_assessment_2[idx].get("attack prompt"):
+                if assess_1.get("is success").strip() == human_assessment_2[idx].get("is success").strip():
+                    accuracy_1 += 1
+                    accuracy_2 += 1
+                    # Store the correct assessment in the dict
+                    correct_assessment_dict[idx]["is success"] = assess_1.get("is success")
+                else:
+                    # Read the final result of discussion for discrepancies cases
+                    which_correct = discrepancy_dict[idx].get("which correct")
+                    if which_correct == "1":
+                        accuracy_1 += 1
+                        correct_assessment_dict[idx]["is success"] = assess_1.get("is success")
+                    else:
+                        accuracy_2 += 1
+                        correct_assessment_dict[idx]["is success"] = human_assessment_2[idx].get("is success")
+            else:
+                print(f"WARNING: something with the attack order. Why attack {idx} are different between evaluators?")
+        
+        # Print the human accuracy
+        accuracy_rate_1 = accuracy_1 / len(human_assessment_1.items())
+        print(f"Evaluator 1 accuracy: {accuracy_1} / {len(human_assessment_1.items())} = {accuracy_rate_1:.4f}")
+
+        accuracy_rate_2 = accuracy_2 / len(human_assessment_2.items())
+        print(f"Evaluator 2 accuracy: {accuracy_2} / {len(human_assessment_2.items())} = {accuracy_rate_2:.4f}")
+
+        # Save the correct answer to a file
+        output_path = "attack_correct_assessment.json"
+        with open(output_path, "w", encoding="utf-8") as file:
+            json.dump(correct_assessment_dict, file, ensure_ascii=False, indent=4)       
+        print(f"Saved the correct assessment into a file: {output_path}")
+    
+    def calculate_llm_accuracy(self, correct_assessment_path: str) -> None:
+        """Calculate llm accuracy overall and over each attack classes.
+        
+        Args:
+            correct_assessment_path (str): the path to the file storing correct assessment
+        """
+        # Read the correct assessment
+        with open(correct_assessment_path, "r", encoding="utf-8") as file_1:
+            correct_assessment = json.load(file_1)
+        # Read LLM report
+        try:
+            with open(self.llm_attack_report_path, 'r', encoding='utf-8') as file:
+                llm_report = [json.loads(line) for line in file]
+        except FileNotFoundError:
+            print(f"File not found: {self.llm_attack_report_path}")
+            return
+        
+        # Count the time llm give correct answer
+        accurate = 0
+        prompt_injection_accuracy = 0
+        prompt_leaking_accuracy = 0
+        jailbreaking_accuracy = 0
+
+        prompt_injection_attack = 0
+        prompt_leaking_attack = 0
+        jailbreaking_attack = 0
+
+        # Variable to store llm wrong assessment cases
+        wrong_case_dict = {}
+
+        # Loop through each attack case
+        for idx, llm_r in enumerate(llm_report):
+            # Check if the same index corresponds to the same attack prompts
+            if llm_r.get("attack prompt").strip() == correct_assessment[f"{idx}"].get("attack prompt").strip():
+                # Check if it is prompt injection, prompt leaking, or jailbreaking attack
+                attack_type = llm_r.get("type of attack")
+                if attack_type == "prompt injection":
+                    prompt_injection_attack += 1
+                elif attack_type == "prompt leaking":
+                    prompt_leaking_attack += 1
+                elif attack_type == "jailbreaking":
+                    jailbreaking_attack += 1
+                else:
+                    print(f"Strang attack type: {attack_type}")
+
+                # Check if llm give correct assessment
+                if str(llm_r.get("is success")).lower() == correct_assessment[f"{idx}"].get("is success"):
+                    accurate += 1
+                    # Update each class accuracy
+                    if attack_type == "prompt injection":
+                        prompt_injection_accuracy += 1
+                    elif attack_type == "prompt leaking":
+                        prompt_leaking_accuracy += 1
+                    elif attack_type == "jailbreaking":
+                        jailbreaking_accuracy += 1
+                    else:
+                        print(f"Strang attack type: {attack_type}")
+                else:
+                    # Store wrong case:
+                    wrong_case_dict[idx] = {
+                        "attack prompt": llm_r.get("attack prompt"),
+                        "chatbot response": llm_r.get("chatbot response"),
+                        "llm assessment": llm_r.get("is success"),
+                        "correct assessment": correct_assessment[f"{idx}"].get("is success")
+                    }
+            else:
+                print(f"WARNING: something with the attack order. Why attack {idx} are different?")
+        
+        # Visualize the result
+        accuracy_rate = accurate / len(llm_report)
+        print(f"LLM attack assessment accuracy: {accurate} / {len(llm_report)} = {accuracy_rate:.4f}")
+
+        # Print each class accuracy
+        # Prompt injection
+        prompt_injection_accuracy_rate = prompt_injection_accuracy / prompt_injection_attack
+        print(f"LLM prompt injection attack assessment accuracy: {prompt_injection_accuracy} / {prompt_injection_attack} = {prompt_injection_accuracy_rate:.4f}")
+        # Prompt leaking
+        prompt_leaking_accuracy_rate = prompt_leaking_accuracy / prompt_leaking_attack
+        print(f"LLM prompt leaking attack assessment accuracy: {prompt_leaking_accuracy} / {prompt_leaking_attack} = {prompt_leaking_accuracy_rate:.4f}")
+        # Jailbreaking
+        jailbreaking_accuracy_rate = jailbreaking_accuracy / jailbreaking_attack
+        print(f"LLM jailbreaking attack assessment accuracy: {jailbreaking_accuracy} / {jailbreaking_attack} = {jailbreaking_accuracy_rate:.4f}")
+        # Add all the classes accuracy into a list
+        class_accuracies = [
+            prompt_injection_accuracy_rate, prompt_leaking_accuracy_rate, jailbreaking_accuracy_rate
+        ]
+
+        # Save the wrong cases into a file
+        output_path = "llm_attack_wrong_cases.json"
+        with open(output_path, "w", encoding="utf-8") as file:
+            json.dump(wrong_case_dict, file, ensure_ascii=False, indent=4)       
+        print(f"Saved LLM wrong cases into a file: {output_path}")
+        return class_accuracies
+
+    
+    def calculate_llm_per_class_variance(self, class_accuracies: list[float]) -> None:
+        """Calculate the variance in accuracy between classes.
+        
+        Args:
+            class_accuracies (list[float]): a list stores the accuracy rate of each class.
+        """
+        # Calculate standard deviation
+        sd = np.std(class_accuracies)
+
+        # Calculate interquartile range
+        q75, q25 = np.percentile(class_accuracies, [75 ,25])
+        iqr = q75 - q25
+
+        # Calculate the mean
+        mean = np.mean(class_accuracies)
+
+        # Calculate median
+        median = statistics.median(class_accuracies)   
+
+        # Visualize the calculated statistics
+        print(f"Standard deviation: {sd:.4f}")
+        print(f"Interquartile range: {iqr:.4f}")
+        print(f"Mean: {mean:.4f}")
+        print(f"Median: {median:.4f}")
+
+
 if __name__ == "__main__":
-    human_experiment = HumanExperiment(True)
-    # human_experiment.create_experiment_form_round_1()
+    # accuracy_experiment = AccuracyExperiment()
+    # accuracy_experiment.create_experiment_form_round_1(is_accuracy=False)
 
-    # human_experiment.change_jsonl_to_json("old_experiment/human_vs_chatbot_comparison_1.jsonl")
+    # accuracy_experiment.change_jsonl_to_json("old_experiment/human_vs_chatbot_comparison_1.jsonl")
 
-    # human_experiment.find_empty_answers("filled_form/human_experiment_second_round_2.json")
+    # accuracy_experiment.find_empty_answers("filled_form/human_experiment_second_round_2.json")
 
-    # human_experiment.create_experiment_form_round_2()
+    # accuracy_experiment.create_experiment_form_round_2()
 
-    # human_experiment.compare_human_assessment(
+    # accuracy_experiment.compare_human_assessment(
     #     "filled_form/human_experiment_second_round_1.json",
     #     "filled_form/human_experiment_second_round_2.json"
     # )
 
-    # human_experiment.create_accurate_assessment(
+    # accuracy_experiment.create_accurate_assessment(
     #     "filled_form/human_experiment_second_round_1.json",
     #     "filled_form/human_experiment_second_round_2.json",
     #     "filled_form/second_round_discrepancies.json"
     # )
 
-    # human_experiment.calculate_llm_accuracy(
+    # accuracy_experiment.calculate_llm_accuracy(
     #     "filled_form/correct_assessment.json"
     # )
 
-    human_experiment.measure_cohen_kappa(
-        "filled_form/human_experiment_second_round_1.json",
-        "filled_form/human_experiment_second_round_2.json",       
+    # accuracy_experiment.measure_cohen_kappa(
+    #     "filled_form/human_experiment_second_round_1.json",
+    #     "filled_form/human_experiment_second_round_2.json",       
+    # )
+
+    attack_experiment = AttackExperiment()
+
+    # attack_experiment.create_human_experiment_form()
+
+    # attack_experiment.find_empty_answer(
+    #     "filled_form/human_experiment_attack_2.json"
+    # )
+
+    # attack_experiment.compare_human_assessment(
+    #     "filled_form/human_experiment_attack_1.json",
+    #     "filled_form/human_experiment_attack_2.json"
+    # )
+
+    # attack_experiment.create_correct_assessment(
+    #     "filled_form/human_experiment_attack_1.json",
+    #     "filled_form/human_experiment_attack_2.json",
+    #     "filled_form/attack_evaluators_discrepancies.json"
+    # )
+
+    class_accuracies = attack_experiment.calculate_llm_accuracy(
+        "filled_form/attack_correct_assessment.json"
     )
+
+    attack_experiment.calculate_llm_per_class_variance(class_accuracies)
